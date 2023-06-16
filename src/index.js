@@ -1,21 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {unstable_HistoryRouter as HistoryRouter, BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomeTemplate from './Templates/HomeTemplate';
 import { Provider } from 'react-redux';
 import { store } from './redux/configStore';
-
+import { createBrowserHistory } from 'history'
+import Home from './Pages/Home';
+import Login from './Pages/Login'
+import Register from './Pages/Register'
+export const customNavigate = createBrowserHistory();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Provider store ={store}>
-  <BrowserRouter>
+  <Provider store={store}>
+    <HistoryRouter history={customNavigate}>
 
-    <Routes>
-      <Route path="" element={<HomeTemplate />}>
-        
-      </Route>
-    </Routes>
-  </BrowserRouter>
+      <Routes>
+        <Route path="" element={<HomeTemplate />}>
+          
+          <Route index element={<Home />}></Route>
+          <Route path='login' element={<Login />}></Route>
+          <Route path='register' element={<Register/>}></Route>
+        </Route>
+      </Routes>
+    </HistoryRouter>
   </Provider>
 );
 
