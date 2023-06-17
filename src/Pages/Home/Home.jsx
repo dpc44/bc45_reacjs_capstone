@@ -38,11 +38,11 @@ const Home = () => {
               </div>
               <div className="card-footer">
                 <div className="row">
-                  <div className=" col-6 btn btn-dark ">
-                    <NavLink href="#" className='text-decoration-none fs-5 text-white'>Buy now</NavLink>
+                  <div className=" col-6 ">
+                    <NavLink href="#" className=' btn btn-dark text-decoration-none  text-white ms-4 mt-1 px-3 py-2 ' to={`/detail/${item.id}`}>View Detail</NavLink>
                   </div>
                   <div className=" col-6">
-                    <p className='text-center align-items-center h-100 justify-content-center fs-4'>{item.price}</p>
+                    <p className='text-center align-items-center  justify-content-center fs-4  mt-1'>{item.price}</p>
                   </div>
                 </div>
               </div>

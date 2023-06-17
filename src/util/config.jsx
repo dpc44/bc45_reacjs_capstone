@@ -88,7 +88,7 @@ http.interceptors.request.use((req) => {
 http.interceptors.response.use((res) => {
     //Tất cả kết quả trả về từ http đều chạy hàm này
     // res.data.result = 'abc';
-    console.log(res.data)
+    // console.log(res.data)
     return res;
 }, err => {
     //Xử lý lỗi 
