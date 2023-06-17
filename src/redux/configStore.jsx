@@ -1,4 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit';
+import ProductListReducer from './reducers/ProductListReducer';
 
 
 
@@ -7,6 +8,6 @@ import {configureStore} from '@reduxjs/toolkit';
 
 export const store = configureStore({
     reducer : {
-        test: (state =1) =>state
+        ProductListReducer : ProductListReducer
     }
 })
