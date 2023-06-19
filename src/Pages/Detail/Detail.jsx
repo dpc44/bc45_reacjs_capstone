@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useParams } from 'react-router-dom'
 import detailCSS from './detail.module.css'
 import { getProductListAPI } from '../../redux/reducers/ProductListReducer';
@@ -7,19 +7,33 @@ import { useDispatch, useSelector } from 'react-redux';
 const Detail = () => {
   const param = useParams();
   const { detailProduct } = useSelector(state => state.ProductListReducer);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const [active,setActive] = useState("");
+  const [quantityProduct, setQuantityProduct] =useState(0);
   const productListAPI = async () => {
     const actionAsync = getProductListAPI(param.id);
     dispatch(actionAsync);
   }
 
+  const tangGiamQuantity = (number)=>{
+    let newNumber = quantityProduct+number
+    setQuantityProduct(newNumber);
+    if(newNumber < 0){
+
+      console.log('tyetxt')
+      setQuantityProduct(0);
+    }
+  }
+
+
+
   useEffect(() => {
     productListAPI();
   }, [param.id])
 
+  
+  
 
-  // console.log('detailProduct.size', detailProduct.size)
-  // console.log(detailProduct)
   return (
     <div className='container'>
       <div className={`${detailCSS.containerDetail}`}>
@@ -34,16 +48,23 @@ const Detail = () => {
           <p style={{ color: 'greenyellow', fontSize: 20, fontWeight: 600 }} className="my-4">Available Size</p>
           <div className={`${detailCSS.sizeList}`}>
 
-            {detailProduct.size?.map((size) => {
-              return <button className="btn btn-success me-2">{size}</button>
+            {detailProduct.size?.map((size,index) => {
+              
+              return <button className={active === index? 'btn btn-warning me-2':'btn btn-success me-2'} onClick={()=>{
+                setActive(index);
+              }} >{size}</button>
             })}
             {/* <button className="btn btn-success me-2">3</button> */}
           </div>
           <p className={`${detailCSS.price}`}>{detailProduct.price}$</p>
           <div className={`${detailCSS.quantity} d-flex`}>
-            <button className=' me-2 px-3  btn btn-primary align-content-center' >-</button>
-            <p className='mx-2 mt-2 align-content-center'>0</p>
-            <button className='mx-2 px-3 btn btn-primary align-content-center'>+</button>
+            <button className=' me-2 px-3  btn btn-primary align-content-center' onClick={()=>{
+              tangGiamQuantity(-1);
+            }}>-</button>
+            <p className='mx-2 mt-2 align-content-center'>{quantityProduct}</p>
+            <button className='mx-2 px-3 btn btn-primary align-content-center' onClick={()=>{
+              tangGiamQuantity(1);
+            }}>+</button>
           </div>
           <button className="btn btn-success my-2">Add to Cart</button>
         </div>
