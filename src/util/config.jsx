@@ -1,7 +1,7 @@
 //Tập tin lưu các dữ liệu hằng số hoặc các utility function
 import axios from 'axios'
 import { customNavigate } from '..';
-export const USER_LOGIN = 'userLogin';
+export const USER_SHOE = 'USERSHOE';
 export const TOKEN = 'accessToken';
 export const DOMAIN = 'https://shop.cyberlearn.vn';
 
@@ -65,16 +65,16 @@ export const http = axios.create({
 
 
 http.interceptors.request.use((req) => {
-    // req.data = {...req.data,'abc':'123'}
+    req.data = {...req.data}
     req.headers = {
         ...req.headers,
 
         TokenCybersoft: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCA0NSIsIkhldEhhblN0cmluZyI6IjIwLzExLzIwMjMiLCJIZXRIYW5UaW1lIjoiMTcwMDQzODQwMDAwMCIsIm5iZiI6MTY3MjA3NDAwMCwiZXhwIjoxNzAwNTg2MDAwfQ.nqyOmcwBXyqINN0ROA_xI8TKx0Jk05_lwRy4Cdv0j_8`
     }
-    if (getStoreJson(USER_LOGIN)) {
+    if (getStoreJson(USER_SHOE)) {
         req.headers = {
             ...req.headers,
-            Authorization: `Bearer ${getStoreJson(USER_LOGIN).accessToken}`
+            Authorization: `Bearer ${getStoreJson(USER_SHOE).accessToken}`
         }
     }
     return req;
@@ -88,7 +88,7 @@ http.interceptors.request.use((req) => {
 http.interceptors.response.use((res) => {
     //Tất cả kết quả trả về từ http đều chạy hàm này
     // res.data.result = 'abc';
-    // console.log(res.data)
+    console.log(res.data)
     return res;
 }, err => {
     //Xử lý lỗi 

@@ -32,7 +32,7 @@ const ProductList = () => {
                   </div>
                 </div>
                 <i className='fa fa-heart position-absolute' style={{top:10, right:10, color:'red',fontSize:30, cursor:'pointer'}} onClick={()=>{
-                    console.log('first')
+                    // console.log('first')
                     
   
                 }}>

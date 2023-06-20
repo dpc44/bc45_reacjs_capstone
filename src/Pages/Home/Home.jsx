@@ -20,7 +20,7 @@ const Home = () => {
                 count++;
                 ProductCarousel.push(arrProduct[number]);
             }
-            console.log('ProductCarousel', ProductCarousel[0]);
+            // console.log('ProductCarousel', ProductCarousel[0]);
         }
 
 
@@ -46,7 +46,7 @@ const Home = () => {
     setRandom(ProductCarousel)
    
   }, [arrProduct])
-  console.log('random ',random)
+  // console.log('random ',random)
 
 
   const arrProductMemo = useMemo(()=> ProductCarousel, [])

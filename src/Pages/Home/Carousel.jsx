@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 const Carousel = (props) => {
     
     const { ProductCarousel } = props
-    console.log(ProductCarousel[1])
+    // console.log(ProductCarousel[1])
     return (
         <div id="carouselExampleDark" className="carousel carousel-dark slide" data-bs-ride="carousel">
                 <div className="carousel-indicators">

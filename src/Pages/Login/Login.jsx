@@ -1,49 +1,49 @@
-import React, { useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { loginAction } from '../../redux/reducers/UserReducer';
-
+import React from 'react'
+import {useFormik} from 'formik'
+import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { loginAction, requestLoginAPI } from '../../redux/reducers/UserReducer';
 const Login = () => {
-
-  const userLoginRef = useRef({
-    username: '',
-    password: ''
-  });
-
-  const {userLogin} = useSelector(state => state.UserReducer)
   const dispatch = useDispatch();
+  const frm = useFormik({
+    initialValues:{
+      email : '',
+      password: ''
+    },
+    onSubmit: (values) =>{
+      console.log('values : ', values)
 
+      // dispatch
 
-
-
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    userLoginRef.current[id] = value;
-  }
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const action = loginAction( userLoginRef.current);
-    dispatch(action);
-    // console.log('userLoginRef', userLoginRef.current);
-  }
-
-
+      const actionAsync = requestLoginAPI(values);
+      dispatch(actionAsync);
+    },
+    validationSchema: yup.object().shape({
+      email:yup.string().required('Email cannot be blank !').email('Email is not valid!'), 
+      password:yup.string().required('Password cannot be blank!')
+    })
+  })
 
 
 
   return (
-    <form className='container' onSubmit={handleSubmit}>
+    <form onSubmit={frm.handleSubmit} className='container'>
       <div className='form-group'>
-        <p>Username</p>
-        <input className='form-control' id="username" onChange={handleChange} />
+        <p>Email</p>
+        <input className='form-control' name='email' id="email" onChange={frm.handleChange} onBlur={frm.handleBlur} />
+        {frm.errors.email && <p className='text-danger'>{frm.errors.email}</p> }
+        
       </div>
       <div className='form-group'>
         <p>Password</p>
-        <input className='form-control' id="password" type="password" onChange={handleChange} />
+        <input className='form-control' type='password' name='password' id="password" onChange={frm.handleChange} onBlur={frm.handleBlur}/>
+        {frm.errors.password && <p className='text-danger'>{frm.errors.password}</p> }
       </div>
-      <div className='form-group text-center'>
-        <button className='btn btn-dark my-2'>Login</button>
+      <div className='form-group'>
+        <button type='submit' className='btn btn-success mt-2'>Login</button>
       </div>
     </form>
+
   )
 }
 
