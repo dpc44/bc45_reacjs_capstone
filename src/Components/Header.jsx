@@ -1,8 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { USER_SHOE } from '../util/config'
+import { loginAction } from '../redux/reducers/UserReducer'
 
 export default class Header extends Component {
   render() {
+    
     return (
       
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
