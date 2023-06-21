@@ -8,6 +8,7 @@ import { createBrowserHistory } from 'history'
 import Home from './Pages/Home';
 import Login from './Pages/Login'
 import Register from './Pages/Register'
+import Search from './Pages/Search';
 export const customNavigate = createBrowserHistory();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,10 +17,10 @@ root.render(
 
       <Routes>
         <Route path="" element={<HomeTemplate />}>
-          
           <Route index element={<Home />}></Route>
           <Route path='login' element={<Login />}></Route>
           <Route path='register' element={<Register/>}></Route>
+          <Route path='search' element={<Search/>}></Route>
         </Route>
       </Routes>
     </HistoryRouter>

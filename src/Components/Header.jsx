@@ -1,8 +1,32 @@
-import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { Component, useRef, useState } from 'react'
+import { NavLink, useSearchParams } from 'react-router-dom'
+import { connect, useDispatch, useSelector } from 'react-redux'
+ const Header =(props)=> {
+    const [searchParams,setSearchParams] = useSearchParams();
+    const keywordRef =useRef()
+    const key = searchParams.get('keyword');
+    // const searchString= useRef();
+    const dispatch = useDispatch();
+   const handleChange=(e)=>{
+        const { value } = e.target;
+        keywordRef.current =value;
+    
+        
+    }
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        setSearchParams({
+            keyword:keywordRef.current
+        })
 
-export default class Header extends Component {
-  render() {
+        let action = {
+            type:'SEARCH_VALUE',          
+            keyword:keywordRef.current
+        }
+        dispatch(action)
+      
+    }
+    
     return (
       
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -19,14 +43,21 @@ export default class Header extends Component {
                     <li className="nav-item">
                         <NavLink className="nav-link" to="/login">Login</NavLink>
                     </li>
-                    
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="/search">Search</NavLink>
+                    </li>
                 </ul>
                 <form className="d-flex my-2 my-lg-0">
-                    <input className="form-control me-sm-2" type="text" placeholder="Search" />
-                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <input className="form-control me-sm-2" type="text" placeholder="Search"  id='keyword' onChange={handleChange}/>
+                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={handleSubmit}>Search</button>
                 </form>
             </div>
         </nav>
     )
   }
-}
+
+const mapStateToProps = (state) => ({})
+
+export default connect(mapStateToProps)(Header)
+
+
