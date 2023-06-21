@@ -1,12 +1,13 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { USER_SHOE } from '../util/config'
 import { loginAction } from '../redux/reducers/UserReducer'
-
+import { customNavigate } from '..';
 const Header = () => {
     const { userLogin } = useSelector(state => state.UserReducer)
     // console.log("userLogin", userLogin);
+    const dispatch = useDispatch();
     const renderLogin = () => {
         if (userLogin.accessToken) {
             return <>
@@ -19,6 +20,11 @@ const Header = () => {
                     <span style={{ cursor: 'pointer' }} className="nav-link" onClick={() => {
                         //clear localstore,cookie => dispatch userLogin = {}
                         localStorage.removeItem(USER_SHOE);
+
+                        //dispatch
+                        const action = loginAction({});
+                        dispatch(action);
+                        customNavigate.push('/');
                     }}>Logout</span>
                 </li>
             </>

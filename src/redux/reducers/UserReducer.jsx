@@ -27,6 +27,10 @@ export const requestLoginAPI = (userInfo) => {
     const res = await http.post('/api/Users/signin', userInfo)
     if(res){
       setStoreJson(USER_SHOE, res.data.content);
+      const action = loginAction(res.data.content);
+      dispatch(action);
+
+      customNavigate.push('/');
     }
       
     
