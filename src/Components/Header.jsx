@@ -1,12 +1,15 @@
-import React, { Component, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import React, { Component,useRef,useState,useEffect } from 'react'
+import {  connect, useDispatch, useSelector, } from 'react-redux'
+import { NavLink,useSearchParams,  } from 'react-router-dom'
 import { USER_SHOE } from '../util/config'
 import { loginAction } from '../redux/reducers/UserReducer'
-import { customNavigate } from '..';
-const Header = () => {
-    const { userLogin } = useSelector(state => state.UserReducer)
-    // console.log("userLogin", userLogin);
+import { customNavigate } from '..'
+const Header =(props)=> {
+    const { userLogin } = useSelector(state => state.UserReducer);
+    const [searchParams,setSearchParams] = useSearchParams();
+    const keywordRef =useRef()
+    const key = searchParams.get('keyword');
+    // const searchString= useRef();
     const dispatch = useDispatch();
     const renderLogin = () => {
         if (userLogin.accessToken) {
@@ -33,10 +36,26 @@ const Header = () => {
             <NavLink className="nav-link" to="/login">Login</NavLink>
         </li>
     }
-
-    return (
-
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+   const handleChange=(e)=>{
+        const { value } = e.target;
+        keywordRef.current =value;
+    
+        
+    }
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+        setSearchParams({
+            keyword:keywordRef.current
+        })
+        let action = {
+            type:'SEARCH_VALUE',          
+            keyword:keywordRef.current
+        }
+        dispatch(action)
+        document.getElementById('frm').reset();
+    }
+    return (  
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
             <NavLink className="navbar-brand" to="/">Cybersoft Shop</NavLink>
             <button className="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation" />
             <div className="collapse navbar-collapse" id="collapsibleNavId">
@@ -48,15 +67,18 @@ const Header = () => {
                         <NavLink className="nav-link" to="/register">Register</NavLink>
                     </li>
                     {renderLogin()}
-
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="/search">Search</NavLink>
+                    </li>
                 </ul>
-                <form className="d-flex my-2 my-lg-0">
-                    <input className="form-control me-sm-2" type="text" placeholder="Search" />
-                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <form className="d-flex my-2 my-lg-0" id='frm'>
+                    <input className="form-control me-sm-2" type="text" placeholder="Search"  id='keyword' onChange={handleChange}/>
+                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={handleSubmit}>Search</button>
                 </form>
             </div>
         </nav>
     )
+  }
+const mapStateToProps = (state) => ({})
+export default connect(mapStateToProps)(Header)
 
-}
-export default Header

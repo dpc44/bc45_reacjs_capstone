@@ -3,7 +3,10 @@ import { Outlet } from 'react-router-dom'
 import Header from '../Components/Header'
 
 const HomeTemplate = () => {
+  
   return (
+  
+
     <div>
         <Header/>
 
@@ -19,3 +22,5 @@ const HomeTemplate = () => {
 }
 
 export default HomeTemplate
+
+
