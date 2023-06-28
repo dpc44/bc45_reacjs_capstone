@@ -11,6 +11,7 @@ import Register from './Pages/Register/Register'
 import Search from './Pages/Search/Search';
 import Detail from './Pages/Detail/Detail'
 import Profile from './Pages/Profile/Profile';
+import Cart from './Pages/Cart/Cart';
 export const customNavigate = createBrowserHistory();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,6 +24,7 @@ root.render(
           <Route path='register' element={<Register/>}></Route>
           <Route path='search' element={<Search/>}></Route>
           <Route path='profile' element={<Profile/>}></Route>
+          <Route path='cart' element={<Cart/>}></Route>
           <Route path='detail'>
             <Route path=':id' element={<Detail/>}></Route>
           </Route>

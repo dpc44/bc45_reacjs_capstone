@@ -12,6 +12,7 @@ const UserReducer = createSlice({
     loginAction: (state, action) => {
       state.userLogin = action.payload;
       // customNavigate.push('/');
+      console.log("loginAction: ", state.userLogin)
     }
   }
 });

@@ -33,7 +33,10 @@ const Header = (props) => {
             </>
         }
         return <>
-        <li className="nav-item">
+            <li className="nav-item">
+                <NavLink className="nav-link" to="/cart">Cart</NavLink>
+            </li>
+            <li className="nav-item">
                 <NavLink className="nav-link" to="/profile">Profile</NavLink>
             </li>
             <li className="nav-item">

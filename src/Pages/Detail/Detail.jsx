@@ -3,13 +3,14 @@ import { NavLink, useParams } from 'react-router-dom'
 import detailCSS from './detail.module.css'
 import { getProductListAPI } from '../../redux/reducers/ProductListReducer';
 import { useDispatch, useSelector } from 'react-redux';
+import { addItemAction } from '../../redux/reducers/CartReducer';
 
 const Detail = () => {
   const param = useParams();
   const { detailProduct } = useSelector(state => state.ProductListReducer);
   const dispatch = useDispatch();
   const [active,setActive] = useState("");
-  const [quantityProduct, setQuantityProduct] =useState(0);
+  const [quantityProduct, setQuantityProduct] =useState(1);
   const productListAPI = async () => {
     const actionAsync = getProductListAPI(param.id);
     dispatch(actionAsync);
@@ -18,10 +19,10 @@ const Detail = () => {
   const tangGiamQuantity = (number)=>{
     let newNumber = quantityProduct+number
     setQuantityProduct(newNumber);
-    if(newNumber < 0){
+    if(newNumber < 1){
 
-      console.log('tyetxt')
-      setQuantityProduct(0);
+      // console.log('tyetxt')
+      setQuantityProduct(1);
     }
   }
 
@@ -66,7 +67,10 @@ const Detail = () => {
               tangGiamQuantity(1);
             }}>+</button>
           </div>
-          <button className="btn btn-success my-2">Add to Cart</button>
+          <button className="btn btn-success my-2" onClick={()=>{
+            const action = addItemAction({detailProduct, quantityProduct});
+            dispatch(action);
+          }}>Add to Cart</button>
         </div>
       </div>
         
