@@ -32,6 +32,9 @@ export const requestLoginAPI = (userInfo) => {
       dispatch(action);
 
       customNavigate.push('/');
+    }else{
+      alert('Đăng nhập thất bại bạn hãy kiểm tra lại email và password');
+      customNavigate.push('/login');
     }
       
     

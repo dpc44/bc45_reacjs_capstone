@@ -15,6 +15,9 @@ const Header = (props) => {
         if (userLogin.accessToken) {
             return <>
                 <li className="nav-item">
+                    <NavLink className="nav-link" to="/cart">Cart</NavLink>
+                </li>
+                <li className="nav-item">
                     <NavLink className="nav-link" to="/profiles">
                         hello {userLogin.email}
                     </NavLink>
@@ -33,9 +36,7 @@ const Header = (props) => {
             </>
         }
         return <>
-            <li className="nav-item">
-                <NavLink className="nav-link" to="/cart">Cart</NavLink>
-            </li>
+
             <li className="nav-item">
                 <NavLink className="nav-link" to="/profile">Profile</NavLink>
             </li>
