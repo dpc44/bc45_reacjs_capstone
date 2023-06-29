@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import TableItem from './TableItem';
+import { useDispatch,useSelector } from 'react-redux'; 
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import axios, { Axios } from 'axios'
+import { setProfileAction } from '../../redux/profileReducer';
+import { getProfileApi } from '../../redux/profileReducer';
 const Profile = () => {
     const randomNumber = Math.floor(Math.random() * 5000);
+    const dispatch = useDispatch();
+    const {userProfile} = useSelector(state=>state.profileReducer)
     const imagePath = `http://i.pravatar.cc/200?u=${randomNumber}`;
+    const getProfileApiFunction= async ()=>{
+        const actionAsyns = getProfileApi();
+        dispatch(actionAsyns)
+    }
+    useEffect(()=>{
+        getProfileApiFunction();
+    },[])
     const frmUpdate = useFormik({
         initialValues: {
           name: '',
@@ -18,7 +30,6 @@ const Profile = () => {
           const checkbox = document.getElementById('men');
           const isChecked = checkbox.checked;
           value.gender = isChecked;
-          console.log('abcds',value)
         //   postSignUpApi('https://shop.cyberlearn.vn/api/Users/signup',value)
           document.getElementById('frmUpdate').reset();
         },
@@ -35,13 +46,13 @@ const Profile = () => {
                         <div className='col-6'>
                             <div className='form-group'>
                                 <p>Name</p>
-                                <input className='form-control' id='name' onChange={frmUpdate.handleChange} onBlur={frmUpdate.handleBlur} />
+                                <input className='form-control' id='name' onChange={frmUpdate.handleChange}  />
                             </div>
                         </div>
                         <div className='col-6'>
                             <div className='form-group'>
                                 <p>Password</p>
-                                <input className='form-control' id='password' onChange={frmUpdate.handleChange} onBlur={frmUpdate.handleBlur} />
+                                <input className='form-control' id='password' onChange={frmUpdate.handleChange}  />
                             </div>
                         </div>
                     </div>
@@ -49,13 +60,13 @@ const Profile = () => {
                         <div className='col-6'>
                             <div className='form-group'>
                                 <p>Phone</p>
-                                <input className='form-control' id='phone' onChange={frmUpdate.handleChange} onBlur={frmUpdate.handleBlur}/>
+                                <input className='form-control' id='phone' onChange={frmUpdate.handleChange} />
                             </div>
                         </div>
                         <div className='col-6'>
                             <div className='form-group'>
                                 <p>Email</p>
-                                <input className='form-control' id='email' onChange={frmUpdate.handleChange} onBlur={frmUpdate.handleBlur}/>
+                                <input className='form-control' id='email' onChange={frmUpdate.handleChange}/>
                             </div>
                         </div>
                     </div>

@@ -6,10 +6,11 @@ import axios from 'axios'
 import _ from 'lodash'
 const Search = (props) => {
   const url = useSelector(state => state.searchStringReducer);
+  console.log('abcd',url.kword)
   const [arrProduct, setArrProduct] = useState([]);
   const getProductByKeyword = async () => {
     let res = await axios({
-      url: `https://shop.cyberlearn.vn/api/Product?keyword=${url}`,
+      url: `https://shop.cyberlearn.vn/api/Product?keyword=${url.kword}`,
       method: 'GET'
     })
     setArrProduct(res.data.content)
@@ -29,12 +30,12 @@ const Search = (props) => {
     setArrProduct(res.data.content)
   }
   useEffect(() => {
-    if (url !== 1) {
+    if (url.kword !== '') {
       getProductByKeyword()
-    } else if (url === 1) {
+    } else if (url.kword === '') {
       getAlltProduct();
     }
-  }, [url])
+  }, [url.kword])
   return (
     <div className='container'>
         <h3>Filter</h3>

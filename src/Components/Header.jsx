@@ -4,12 +4,13 @@ import { NavLink, useSearchParams, } from 'react-router-dom'
 import { USER_SHOE } from '../util/config'
 import { loginAction } from '../redux/reducers/UserReducer'
 import { customNavigate } from '..'
+import { searchAction } from '../redux/reducers/searchStringReducer'
 const Header = (props) => {
     const { userLogin } = useSelector(state => state.UserReducer);
+    const { kwork } = useSelector(state => state.searchStringReducer);
     const [searchParams, setSearchParams] = useSearchParams();
     const keywordRef = useRef()
     const key = searchParams.get('keyword');
-    // const searchString= useRef();
     const dispatch = useDispatch();
     const renderLogin = () => {
         if (userLogin.accessToken) {
@@ -23,7 +24,6 @@ const Header = (props) => {
                     <span style={{ cursor: 'pointer' }} className="nav-link" onClick={() => {
                         //clear localstore,cookie => dispatch userLogin = {}
                         localStorage.removeItem(USER_SHOE);
-
                         //dispatch
                         const action = loginAction({});
                         dispatch(action);
@@ -55,12 +55,12 @@ const Header = (props) => {
         setSearchParams({
             keyword: keywordRef.current
         })
-        let action = {
-            type: 'SEARCH_VALUE',
-            keyword: keywordRef.current
-        }
+        let action = searchAction(
+            keywordRef.current
+        );
         dispatch(action)
         document.getElementById('frm').reset();
+
     }
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
