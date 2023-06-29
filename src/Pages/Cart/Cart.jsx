@@ -1,8 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { changeQuantity, delItemAction } from '../../redux/reducers/CartReducer';
 const Cart = () => {
     const { gioHang } = useSelector(state => state.CartReducer);
+    const dispatch = useDispatch();
     console.log('gioHang: ', gioHang)
+
+    // const newGioHang = gioHang.map(({id, quantity}) => ({id,quantity}));
+    // console.log("newGioHang: ", newGioHang)
+    // format $
+    let USDollar = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumSignificantDigits: 3,
+    });
+
+    const tinhTongTien = () =>{
+        let tong = 0;
+        // console.log('here')
+        for(let item of gioHang){
+            tong += (item.price * item.quantity);
+        }
+        return tong;
+    }
     return (
         <div className='container'>
             Cart
@@ -26,17 +46,26 @@ const Cart = () => {
                             <td>{item.id}</td>
                             <td>{item.name}</td>
                             <td>
-                                <img src={item.image} alt="..." width={50}/>
+                                <img src={item.image} alt="..." width={50} />
                             </td>
                             <td>{item.price}</td>
                             <td>
-                                <button className='btn btn-primary mx-2' onClick={() => { }}>-</button>
+                                <button className='btn btn-primary mx-2' onClick={() => {
+                                    const action = changeQuantity({ idProduct: item.id, quantityNumber: -1 });
+                                    dispatch(action);
+                                }}>-</button>
                                 {item.quantity}
-                                <button className='btn btn-primary mx-2' onClick={() => { }}>+</button>
+                                <button className='btn btn-primary mx-2' onClick={() => {
+                                    const action = changeQuantity({ idProduct: item.id, quantityNumber: 1 });
+                                    dispatch(action);
+                                }}>+</button>
                             </td>
                             <td>{item.quantity * item.price}</td>
                             <td>
-                                <button className='btn btn-outline-danger' onClick={() => { }}>
+                                <button className='btn btn-outline-danger' onClick={() => {
+                                    const action = delItemAction(item.id)
+                                    dispatch(action);
+                                 }}>
                                     <i className='fa fa-close'></i>
                                 </button>
                             </td>
@@ -44,7 +73,17 @@ const Cart = () => {
 
                     })}
                 </tbody>
+
+                
+
+
             </table>
+            <div className='d-flex justify-content-between'>
+                    <h3>Total: {USDollar.format(tinhTongTien())}</h3>
+                    <button className='btn btn-primary mx-5 px-4'>Order</button>
+
+
+                </div>
         </div>
     )
 }

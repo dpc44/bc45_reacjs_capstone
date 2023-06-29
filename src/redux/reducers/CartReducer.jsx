@@ -28,10 +28,35 @@ const CartReducer = createSlice({
 
             
             
-        }
+        },
+        changeQuantity :(state,action) =>{
+            console.log('action payload : ', action.payload);
+            const itemQuantity = action.payload;
+            let item = state.gioHang.find(sp => sp.id== itemQuantity.idProduct)
+            if(item){
+                item.quantity += itemQuantity.quantityNumber;
+                // console.log('item.quantity: ', item.quantity)
+                if (item.quantity < 1) {
+                    if (window.confirm('bạn có muốn xoá sản phẩm này không ?')) {
+                      state.gioHang = state.gioHang.filter(sp => sp.id !== itemQuantity.idProduct);
+                    } else {
+                      item.quantity -= itemQuantity.quantityNumber;
+                    }
+                  } 
+            }
+        },
+        delItemAction: (state, action) => {
+            // console.log(action);
+            // let indexDel = state.gioHang.findIndex(item => item.id == action.payload);
+            // if (indexDel !== -1) {
+            //   state.gioHang.splice(indexDel, 1);
+            // }
+            state.gioHang = state.gioHang.filter(sp => sp.id !== action.payload);
+
+          },
     }
 });
 
-export const { addItemAction } = CartReducer.actions
+export const { addItemAction, changeQuantity,delItemAction } = CartReducer.actions
 
 export default CartReducer.reducer

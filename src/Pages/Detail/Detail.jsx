@@ -26,9 +26,10 @@ const Detail = () => {
     }
   }
 
-
+  
 
   useEffect(() => {
+    setQuantityProduct(1);
     productListAPI();
   }, [param.id])
 
