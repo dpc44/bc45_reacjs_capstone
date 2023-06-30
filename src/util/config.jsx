@@ -92,9 +92,13 @@ http.interceptors.response.use((res) => {
     return res;
 }, err => {
     //Xử lý lỗi 
+    // console.log('first')
+    // localStorage.clear();
+    // customNavigate.push('/');
     if (err.response?.status === 401) {
-        console.log(err)
-        localStorage.clear();
+        
+        // console.log(err)
+
         //Nếu chưa đủ quyền thì đá về login
         customNavigate.push('/');
         return;
