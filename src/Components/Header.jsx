@@ -18,8 +18,8 @@ const Header = (props) => {
                     <NavLink className="nav-link" to="/cart">Cart</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="/profiles">
-                        hello {userLogin.email}
+                    <NavLink className="nav-link" to="/profile">
+                        profile
                     </NavLink>
                 </li>
                 <li className="nav-item">

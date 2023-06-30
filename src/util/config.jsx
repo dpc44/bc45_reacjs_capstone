@@ -93,8 +93,10 @@ http.interceptors.response.use((res) => {
 }, err => {
     //Xử lý lỗi 
     if (err.response?.status === 401) {
+        console.log(err)
+        localStorage.clear();
         //Nếu chưa đủ quyền thì đá về login
-        customNavigate.push('/login');
+        customNavigate.push('/');
         return;
     }
     if(err.response?.status === 400 || err.response?.status  === 404){
