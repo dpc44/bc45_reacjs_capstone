@@ -71,7 +71,7 @@ const Detail = () => {
           </div>
           <button className="btn btn-success my-2" onClick={() => {
             if (localStorage.getItem(USER_SHOE)) {
-              console.log('mua sam')
+              // console.log('mua sam')
               const action = addItemAction({ detailProduct, quantityProduct });
               dispatch(action);
             }else{

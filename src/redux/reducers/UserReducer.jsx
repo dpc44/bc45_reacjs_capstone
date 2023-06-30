@@ -12,7 +12,7 @@ const UserReducer = createSlice({
     loginAction: (state, action) => {
       state.userLogin = action.payload;
       // customNavigate.push('/');
-      console.log("loginAction: ", state.userLogin)
+      // console.log("loginAction: ", state.userLogin)
     }
   }
 });
@@ -23,7 +23,7 @@ export default UserReducer.reducer
 
 //email: khaibc43@gmail.com - password: 123
 export const requestLoginAPI = (userInfo) => {
-  console.log('userInfo', userInfo)
+  // console.log('userInfo', userInfo)
   return async dispatch => {
     const res = await http.post('/api/Users/signin', userInfo)
     if(res){

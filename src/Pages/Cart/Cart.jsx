@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { changeQuantity, delItemAction } from '../../redux/reducers/CartReducer';
+import { changeQuantity, delItemAction, postOrderApi } from '../../redux/reducers/CartReducer';
 const Cart = () => {
     const { gioHang } = useSelector(state => state.CartReducer);
     const dispatch = useDispatch();
-    console.log('gioHang: ', gioHang)
+    // console.log('gioHang: ', gioHang)
 
-    // const newGioHang = gioHang.map(({id, quantity}) => ({id,quantity}));
+    const newGioHang = gioHang.map(({id, quantity}) => ({id,quantity}));
     // console.log("newGioHang: ", newGioHang)
     // format $
     let USDollar = new Intl.NumberFormat('en-US', {
@@ -23,6 +23,17 @@ const Cart = () => {
         }
         return tong;
     }
+
+
+    const orderApi = async () => {
+        
+        const actionAsync = postOrderApi(newGioHang);
+    
+        dispatch(actionAsync);
+    
+    
+        
+      }
     return (
         <div className='container'>
             Cart
@@ -78,12 +89,13 @@ const Cart = () => {
 
 
             </table>
-            <div className='d-flex justify-content-between'>
+            {gioHang.length !== 0 ? <div className='d-flex justify-content-between'>
                     <h3>Total: {USDollar.format(tinhTongTien())}</h3>
-                    <button className='btn btn-primary mx-5 px-4'>Order</button>
+                    <button className='btn btn-primary mx-5 px-4' onClick={orderApi}>Order</button>
 
 
-                </div>
+            </div> : <></> }
+            
         </div>
     )
 }
