@@ -10,8 +10,6 @@ const searchStringReducer = createSlice({
   reducers:{
     searchAction:(state,action)=>{
         state.kword=action.payload
-        console.log('abcccc',action)
-        console.log('123',state.kword)
     }
   }
 });
@@ -19,5 +17,3 @@ const searchStringReducer = createSlice({
 export const {searchAction} = searchStringReducer.actions
 
 export default searchStringReducer.reducer
-
-console.log('abc',initialState)

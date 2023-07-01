@@ -6,7 +6,6 @@ import axios from 'axios'
 import _ from 'lodash'
 const Search = (props) => {
   const url = useSelector(state => state.searchStringReducer);
-  console.log('abcd',url.kword)
   const [arrProduct, setArrProduct] = useState([]);
   const getProductByKeyword = async () => {
     let res = await axios({
@@ -43,7 +42,6 @@ const Search = (props) => {
              let {value}=e.target; 
              if(value==='low-to-high'){
                let arrPriceItem = _.sortBy(arrProduct, _.property('price'));
-               console.log('abc',arrPriceItem)
                setArrProduct(arrPriceItem)
             }else if(value==='high-to-low'){
               let arrPriceItem = _.sortBy(arrProduct, _.property('price')).reverse();

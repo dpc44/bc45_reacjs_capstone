@@ -4,9 +4,9 @@ import { USER_SHOE, getStoreJson } from '../util/config';
 import { customNavigate } from '..';
 
 const initialState = {
-    userProflie: {
+    userProfile: {
 
-    }
+    },
 }
 
 const profileReducer = createSlice({
@@ -14,12 +14,12 @@ const profileReducer = createSlice({
     initialState,
     reducers: {
         setProfileAction: (state, action) => {
-            state.userProflie = action.payload
-        }
+            state.userProfile= action.payload
+        },    
     }
 });
 
-export const { setProfileAction } = profileReducer.actions
+export const { setProfileAction} = profileReducer.actions
 
 export default profileReducer.reducer
 
@@ -42,6 +42,6 @@ export const getProfileApi = () => {
                 customNavigate.push('/login')
             }
         }
-       
+        
     }
 }

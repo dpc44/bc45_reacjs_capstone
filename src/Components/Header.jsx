@@ -16,7 +16,7 @@ const Header = (props) => {
         if (userLogin.accessToken) {
             return <>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="/profiles">
+                    <NavLink className="nav-link" to="/profile">
                         hello {userLogin.email}
                     </NavLink>
                 </li>
@@ -33,12 +33,7 @@ const Header = (props) => {
             </>
         }
         return <>
-        <li className="nav-item">
-                <NavLink className="nav-link" to="/profile">Profile</NavLink>
-            </li>
-            <li className="nav-item">
-                <NavLink className="nav-link" to="/register">Register</NavLink>
-            </li>
+
             <li className="nav-item">
                 <NavLink className="nav-link" to="/login">Login</NavLink>
             </li>
@@ -47,8 +42,6 @@ const Header = (props) => {
     const handleChange = (e) => {
         const { value } = e.target;
         keywordRef.current = value;
-
-
     }
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -80,9 +73,14 @@ const Header = (props) => {
                     </form>
                 </ul>
 
-
                 <ul className="navbar-nav mt-2 mt-lg-0">
                     {renderLogin()}
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="/profile">Profile</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="/register">Register</NavLink>
+                    </li>
                 </ul>
             </div>
         </nav>

@@ -6,18 +6,48 @@ import * as yup from 'yup'
 import axios, { Axios } from 'axios'
 import { setProfileAction } from '../../redux/profileReducer';
 import { getProfileApi } from '../../redux/profileReducer';
+import { USER_SHOE, getStoreJson } from '../../util/config';
 const Profile = () => {
     const randomNumber = Math.floor(Math.random() * 5000);
     const dispatch = useDispatch();
-    const {userProfile} = useSelector(state=>state.profileReducer)
-    const imagePath = `http://i.pravatar.cc/200?u=${randomNumber}`;
+    const {userProfile} = useSelector(state=>state.profileReducer);
+    useEffect(()=>{
+        if (userProfile) {
+            document.getElementById('name').value = userProfile.name;
+            document.getElementById('password').value = userProfile.password;
+            document.getElementById('phone').value = userProfile.phone;
+            document.getElementById('email').value = userProfile.email;
+        }
+    },[userProfile]);
+    useEffect(()=>{
+        getProfileApiFunction()
+    },[])
+
+
     const getProfileApiFunction= async ()=>{
         const actionAsyns = getProfileApi();
         dispatch(actionAsyns)
     }
-    useEffect(()=>{
-        getProfileApiFunction();
-    },[])
+    // const imagePath = `http://i.pravatar.cc/200?u=${randomNumber}`;
+
+    const postUpdateProfileApi =  async(value) => {
+        try {
+            const res = await axios({
+                url: 'https://shop.cyberlearn.vn/api/Users/updateProfile',
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${getStoreJson(USER_SHOE).accessToken}`
+                },
+                data:value
+            })
+            console.log("Phản hồi từ server:",res.data);
+            window.alert('Thay đổi tài khoản thành công!');
+        }
+        catch(err){
+            console.error("Lỗi:", err);
+            window.alert('Thay đổi tài khoản thất bại!');
+        }
+      }
     const frmUpdate = useFormik({
         initialValues: {
           name: '',
@@ -30,7 +60,7 @@ const Profile = () => {
           const checkbox = document.getElementById('men');
           const isChecked = checkbox.checked;
           value.gender = isChecked;
-        //   postSignUpApi('https://shop.cyberlearn.vn/api/Users/signup',value)
+          postUpdateProfileApi(value);
           document.getElementById('frmUpdate').reset();
         },
       })
@@ -38,15 +68,15 @@ const Profile = () => {
         <div className='container'>
             <h3 className='my-4 bg-primary text-white w-50 text-center mx-auto'>Profile</h3>
             <div className='row'>
-                <div className='col-4 text-center'>
-                    <img src={imagePath} alt="..." className='w-50' />
+                <div className='col-4 text-center '>
+                    <img src={userProfile.avatar} alt="..." className='w-50 rounded' />
                 </div>
                 <form className='col-8' onSubmit={frmUpdate.handleSubmit}  id='frmUpdate'>
                     <div className='row'>
                         <div className='col-6'>
                             <div className='form-group'>
                                 <p>Name</p>
-                                <input className='form-control' id='name' onChange={frmUpdate.handleChange}  />
+                                <input className='form-control' id='name' onChange={frmUpdate.handleChange}/>
                             </div>
                         </div>
                         <div className='col-6'>
@@ -84,7 +114,8 @@ const Profile = () => {
                         </div>
                     </div>
                     <div>
-                        <button className='btn btn-primary my-3'>Update</button>
+                        <button className='btn btn-primary my-3' onClick={()=>{
+                        }}>Update</button>
                     </div>
                 </form>
             </div>
