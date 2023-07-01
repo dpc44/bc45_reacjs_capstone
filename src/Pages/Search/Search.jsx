@@ -9,7 +9,7 @@ const Search = (props) => {
   const [arrProduct, setArrProduct] = useState([]);
   const getProductByKeyword = async () => {
     let res = await axios({
-      url: `https://shop.cyberlearn.vn/api/Product?keyword=${url}`,
+      url: `https://shop.cyberlearn.vn/api/Product?keyword=${url.kword}`,
       method: 'GET'
     })
     setArrProduct(res.data.content)
@@ -29,12 +29,12 @@ const Search = (props) => {
     setArrProduct(res.data.content)
   }
   useEffect(() => {
-    if (url !== 1) {
+    if (url.kword !== '') {
       getProductByKeyword()
-    } else if (url === 1) {
+    } else if (url.kword === '') {
       getAlltProduct();
     }
-  }, [url])
+  }, [url.kword])
   return (
     <div className='container'>
         <h3>Filter</h3>
@@ -42,7 +42,6 @@ const Search = (props) => {
              let {value}=e.target; 
              if(value==='low-to-high'){
                let arrPriceItem = _.sortBy(arrProduct, _.property('price'));
-               console.log('abc',arrPriceItem)
                setArrProduct(arrPriceItem)
             }else if(value==='high-to-low'){
               let arrPriceItem = _.sortBy(arrProduct, _.property('price')).reverse();

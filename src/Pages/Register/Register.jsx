@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import axios, { Axios } from 'axios'
 export const Register = (props) => {
   const { userRegister, errorRegister } = props;
-  const { name, phone, password, email } = userRegister;
+  const dispatch = useDispatch();
   const postSignUpApi = (apiUrl,postData) => {
     axios.post(apiUrl, postData)
       .then((response) => {
@@ -28,11 +28,6 @@ export const Register = (props) => {
       gender: ''
     },
     onSubmit: (value) => {
-      const action = {
-        type: 'USER_REGISTER',
-        payload: value
-      }
-      props.dispatch(action)
       const checkbox = document.getElementById('men');
       const isChecked = checkbox.checked;
       value.gender = isChecked;
