@@ -6,7 +6,7 @@ import { loginAction } from '../redux/reducers/UserReducer'
 import { customNavigate } from '..'
 const Header = (props) => {
     const { userLogin } = useSelector(state => state.UserReducer);
-    const{gioHang} = useSelector(state=> state.CartReducer);
+    const { gioHang } = useSelector(state => state.CartReducer);
     const [searchParams, setSearchParams] = useSearchParams();
     const keywordRef = useRef()
     const key = searchParams.get('keyword');
@@ -16,7 +16,7 @@ const Header = (props) => {
         if (userLogin.accessToken) {
             return <>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="/cart">{gioHang.length === 0 ? `cart` : `(${gioHang.length}) Cart`}</NavLink>
+                    <NavLink className="nav-link" to="/cart">{gioHang.length === 0 ? <i class="fa fa-shopping-cart" aria-hidden="true"></i> :  <div><span>({gioHang.length})</span><i class="fa fa-shopping-cart" aria-hidden="true"></i></div> }</NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink className="nav-link" to="/profile">

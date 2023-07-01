@@ -13,21 +13,22 @@ const LoginFacebook = () => {
     const dispatch = useDispatch();
 
     const responseFacebook = async (response) => {
-        let res = await axios({
-            url: `https://shop.cyberlearn.vn/api/Users/facebooklogin`,
-            method: 'POST',
-            data: {
-                facebookToken: response.accessToken
-            }
-        })
-        if (res) {
-            setStoreJson(USER_SHOE, res.data.content);
-            const action = loginAction(res.data.content);
-            dispatch(action);
-            customNavigate.push('/');
-        }
+        // let res = await axios({
+        //     url: `https://shop.cyberlearn.vn/api/Users/facebooklogin`,
+        //     method: 'POST',
+        //     data: {
+        //         facebookToken: response.accessToken
+        //     }
+        // })
+        // if (res) {
+        //     setStoreJson(USER_SHOE, res.data.content);
+        //     const action = loginAction(res.data.content);
+        //     dispatch(action);
+        //     customNavigate.push('/');
+        // }
 
-
+        const actionAsync = requestLoginFacebookAPI(response.accessToken);
+        dispatch(actionAsync);
 
 
     }

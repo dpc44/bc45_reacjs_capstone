@@ -26,18 +26,18 @@ export const requestLoginAPI = (userInfo) => {
   // console.log('userInfo', userInfo)
   return async dispatch => {
     const res = await http.post('/api/Users/signin', userInfo)
-    if(res){
+    if (res) {
       setStoreJson(USER_SHOE, res.data.content);
       const action = loginAction(res.data.content);
       dispatch(action);
 
       customNavigate.push('/');
-    }else{
+    } else {
       alert('Đăng nhập thất bại bạn hãy kiểm tra lại email và password');
       customNavigate.push('/login');
     }
-      
-    
+
+
 
 
 
@@ -48,20 +48,18 @@ export const requestLoginAPI = (userInfo) => {
 }
 
 
-export const requestLoginFacebookAPI = (facebookToken) => {
-  console.log('facebookToken', facebookToken)
+export const requestLoginFacebookAPI = (Token) => {
+  // console.log('facebookToken', typeof Token)
   return async dispatch => {
-    const res = await http.post('/api/Users/facebooklogin', facebookToken)
-    if(res){
-      console.log('res.data.content', res.data.content)
+    const res = await http.post('/api/Users/facebooklogin', { facebookToken: Token });
+    if (res) {
       setStoreJson(USER_SHOE, res.data.content);
       const action = loginAction(res.data.content);
       dispatch(action);
-
-      // customNavigate.push('/');
+      customNavigate.push('/');
     }
-      
-    
+
+
 
 
 
