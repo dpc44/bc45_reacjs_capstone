@@ -46,3 +46,27 @@ export const requestLoginAPI = (userInfo) => {
 
 
 }
+
+
+export const requestLoginFacebookAPI = (facebookToken) => {
+  console.log('facebookToken', facebookToken)
+  return async dispatch => {
+    const res = await http.post('/api/Users/facebooklogin', facebookToken)
+    if(res){
+      console.log('res.data.content', res.data.content)
+      setStoreJson(USER_SHOE, res.data.content);
+      const action = loginAction(res.data.content);
+      dispatch(action);
+
+      // customNavigate.push('/');
+    }
+      
+    
+
+
+
+
+  }
+
+
+}

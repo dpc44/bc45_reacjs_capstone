@@ -65,6 +65,7 @@ export const http = axios.create({
 
 
 http.interceptors.request.use((req) => {
+    // console.log("req.data: ", req.data)
     req.data = {...req.data}
     req.headers = {
         ...req.headers,
