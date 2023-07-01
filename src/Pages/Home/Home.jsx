@@ -56,7 +56,9 @@ const Home = () => {
     <div >
       <Carousel ProductCarousel ={arrProduct}/>
       <h3 className='text-center fs-3 fw-5 my-3'>Products List</h3>
+      <div style={{border:'1px solid #feb1b4', margin:'20px'}}>
       <ProductList />
+      </div>
     </div>
 
   )

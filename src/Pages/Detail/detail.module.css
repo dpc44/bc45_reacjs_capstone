@@ -1,6 +1,7 @@
 .containerDetail {
     display: flex;
     margin: 55px 55px;
+    
 }
 
 .containerDetail .imgProduct {
@@ -28,9 +29,17 @@
 }
 
 .containerDetail .detailProduct .price {
-    color: red;
+    color: #f5202b;
     font-size: 20px;
     font-weight: 600;
 }
 
+.orderButton {
+    background-color: #ff9298;
+    transition: 0.5s;
+}
 
+.orderButton:hover {
+    background-color: #f81420;
+    transition: 0.5s;
+}

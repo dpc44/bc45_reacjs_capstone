@@ -16,11 +16,11 @@ const Header = (props) => {
         if (userLogin.accessToken) {
             return <>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="/cart">{gioHang.length === 0 ? <i class="fa fa-shopping-cart" aria-hidden="true"></i> :  <div><span>({gioHang.length})</span><i class="fa fa-shopping-cart" aria-hidden="true"></i></div> }</NavLink>
+                    <NavLink className="nav-link" to="/cart">{gioHang.length === 0 ? <i class="fa fa-shopping-cart" aria-hidden="true"></i> : <div><span>({gioHang.length})</span><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>}</NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink className="nav-link" to="/profile">
-                        profile
+                        <i class="fa fa-user" aria-hidden="true"></i>
                     </NavLink>
                 </li>
                 <li className="nav-item">
@@ -37,10 +37,6 @@ const Header = (props) => {
             </>
         }
         return <>
-
-            <li className="nav-item">
-                <NavLink className="nav-link" to="/profile">Profile</NavLink>
-            </li>
             <li className="nav-item">
                 <NavLink className="nav-link" to="/register">Register</NavLink>
             </li>

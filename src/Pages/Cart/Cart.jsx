@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { changeQuantity, delItemAction, postOrderApi } from '../../redux/reducers/CartReducer';
+import cartCSS from './Cart.module.css'
 const Cart = () => {
     const { gioHang } = useSelector(state => state.CartReducer);
     const dispatch = useDispatch();
@@ -36,10 +37,9 @@ const Cart = () => {
       }
     return (
         <div className='container'>
-            Cart
             <table className='table'>
                 <thead>
-                    <tr>
+                    <tr style={{backgroundColor:'#f3d8d8'}}>
 
                         <th>id</th>
                         <th>name</th>
@@ -91,7 +91,7 @@ const Cart = () => {
             </table>
             {gioHang.length !== 0 ? <div className='d-flex justify-content-between'>
                     <h3>Total: {USDollar.format(tinhTongTien())}</h3>
-                    <button className='btn btn-primary mx-5 px-4' onClick={orderApi}>Order</button>
+                    <button className={`btn  ${cartCSS.cartButton} mx-5 px-4`} onClick={orderApi}>Order</button>
 
 
             </div> : <></> }

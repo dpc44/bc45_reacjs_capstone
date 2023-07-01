@@ -1,0 +1,23 @@
+tbody tr:nth-child(even){
+    background-color: #ff9298;
+}
+
+tr:hover {
+    
+    background-color: #ccccff;
+    transition: 0.5;
+}
+tr:hover:nth-child(even) {
+    background-color: #ccccff;
+    transition: 0.5;
+}
+
+.cartButton{
+    background-color: #f3d8d8;
+    transition: 0.5s;
+}
+
+.cartButton:hover{
+    background-color: #ff9298;
+    transition: 0.5s;
+}
