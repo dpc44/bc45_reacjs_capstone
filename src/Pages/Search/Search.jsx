@@ -4,6 +4,7 @@ import useGetApi from '../../CustomHooks/useGetApi'
 import { useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 import _ from 'lodash'
+import searchCSS from '../Search/search.module.css'
 const Search = (props) => {
   const url = useSelector(state => state.searchStringReducer);
   const [arrProduct, setArrProduct] = useState([]);
@@ -36,59 +37,60 @@ const Search = (props) => {
     }
   }, [url.kword])
   return (
-    <div className='container'>
-        <h3>Filter</h3>
-          <select name="" id="" onChange={(e)=>{
-             let {value}=e.target; 
-             if(value==='low-to-high'){
-               let arrPriceItem = _.sortBy(arrProduct, _.property('price'));
-               setArrProduct(arrPriceItem)
-            }else if(value==='high-to-low'){
-              let arrPriceItem = _.sortBy(arrProduct, _.property('price')).reverse();
-              setArrProduct(arrPriceItem)
-            }
-          }}>
-            <option >All</option>
-            <option >low-to-high</option>
-            <option >high-to-low</option>
-          </select>
-        <select name="" id="" onChange={(e)=>{
-             let {value}=e.target;
-             if(value==='All'){
-              getAlltProduct();
-             }else{
-               getProductByCategory(value);
-             }
-          }}>
-            <option >All</option>
-            <option >Men</option>
-            <option >Women</option>
-          </select>
-          <select name="" id=""  onChange={(e)=>{
-             let {value}=e.target; 
-             if(value==='All'){
-              getAlltProduct();
-             }else{
-               getProductByCategory(value);
-             }
-          }}>
-            <option >All</option>
-            <option >Nike</option>
-            <option >Adidas</option>          
-          </select>
-        
+    <div className='p-5 ' style={{ backgroundColor: '#999999' }}>
+      <h3 className='text-center fs-1 '>Filter</h3>
+      <select className='' onChange={(e) => {
+        let { value } = e.target;
+        if (value === 'low-to-high') {
+          let arrPriceItem = _.sortBy(arrProduct, _.property('price'));
+          setArrProduct(arrPriceItem)
+        } else if (value === 'high-to-low') {
+          let arrPriceItem = _.sortBy(arrProduct, _.property('price')).reverse();
+          setArrProduct(arrPriceItem)
+        }
+      }}>
+        <option >All</option>
+        <option >low-to-high</option>
+        <option >high-to-low</option>
+      </select>
+      <select name="" id="" onChange={(e) => {
+        let { value } = e.target;
+        if (value === 'All') {
+          getAlltProduct();
+        } else {
+          getProductByCategory(value);
+        }
+      }}>
+        <option >All</option>
+        <option >Men</option>
+        <option >Women</option>
+      </select>
+      <select name="" id="" onChange={(e) => {
+        let { value } = e.target;
+        if (value === 'All') {
+          getAlltProduct();
+        } else {
+          getProductByCategory(value);
+        }
+      }}>
+        <option >All</option>
+        <option >Nike</option>
+        <option >Adidas</option>
+      </select>
+
       <div className='row'>
         {arrProduct.map((item) => {
-          return <div className='col-4 my-3' key={item.id}>
-            <div className='card'>
+          return <div className='col-12 col-md-6 col-lg-4 my-3' key={item.id}>
+            <div className={`card ${searchCSS.cardTag}`} style={{backgroundImage:'url("./Img/111.jpg")'}}>
               <img src={item.image} alt="...." />
-              <div className='card-body bg-pr'>
-                <h3>{item.name}</h3>
-                <p>{item.price}$</p>
-                <p>{item.shortDescription}$</p>
-                <button className='btn btn-primary'>Add to Cart<i className="fa fa-cart-arrow-down mx-1"></i></button>
+              <div className={`card-body ${searchCSS.cardBody}`} style={{ minHeight: '150px' }}>
+                <h3 className='text-center'>{item.name}</h3>
+                <p className='text-danger fs-4'>{item.price}$</p>
+                <p>{item.shortDescription}</p>
               </div>
-
+              <div className={`card-body ${searchCSS.cardFooter}`}>
+                <button className='btn text-white my-3 p-2' style={{ backgroundColor: '#198754' }}>Add to Cart<i className="fa fa-cart-arrow-down mx-1"></i></button>
+              </div>
             </div>
 
           </div>

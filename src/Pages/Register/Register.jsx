@@ -48,7 +48,7 @@ export const Register = (props) => {
   return (
     <div className='container mt-5'>
       <form className='card w-50 m-auto' onSubmit={frm.handleSubmit}  id='frmRegister'>
-        <div className='card-header bg-primary text-white text-center fs-2'>
+        <div className='card-header bg-success text-white text-center fs-2'>
           Sign Up
         </div>
         <div className='card-body fs-5'>

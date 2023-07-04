@@ -28,13 +28,16 @@ const Login = () => {
 
 
   return (
-    <div>
-      <form onSubmit={frm.handleSubmit} className='container'>
+    <div >
+      <form onSubmit={frm.handleSubmit} className='container w-25 card' >
+        <div className='card-header text-center'>
+        <h3 className=''>Login</h3>
+        </div>
+        <div className='card-body'>
         <div className='form-group'>
           <p>Email</p>
           <input className='form-control' name='email' id="email" onChange={frm.handleChange} onBlur={frm.handleBlur} />
           {frm.errors.email && <p className='text-danger'>{frm.errors.email}</p>}
-
         </div>
         <div className='form-group'>
           <p>Password</p>
@@ -42,9 +45,11 @@ const Login = () => {
           {frm.errors.password && <p className='text-danger'>{frm.errors.password}</p>}
         </div>
         <div className='form-group text-center'>
-          <button type='submit' className='btn btn-success my-2'>Login</button>
-          
+          <button type='submit' className='btn btn-success my-3'>Login</button>
         </div>
+        </div>
+        
+      
       </form>
       <LoginFacebook />
     </div>

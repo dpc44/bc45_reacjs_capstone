@@ -6,7 +6,7 @@ const Carousel = (props) => {
     const { ProductCarousel } = props
     // console.log(ProductCarousel[1])
     return (
-        <div id="carouselExampleDark" className="carousel carousel-dark slide" data-bs-ride="carousel" style={{backgroundColor:'#f3d8d8'}}>
+        <div id="carouselExampleDark" className="carousel carousel-dark slide" data-bs-ride="carousel" style={{backgroundColor:'#999999'}}>
                 <div className="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to={0} className="active" aria-current="true" aria-label="Slide 1" />
                     <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to={1} aria-label="Slide 2" />

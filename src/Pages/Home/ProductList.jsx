@@ -15,10 +15,10 @@ const ProductList = () => {
         <div className="row">
           {arrProduct.map((item) => {
             return <div className="col-12 col-md-6 col-lg-4 my-2" key={item.id}>
-              <div className={`card mt-4 position-relative ${productCSS.cardTag}`}>
+              <div className={`card mt-4 position-relative ${productCSS.cardTag}` }> 
                 <img className={`${productCSS.cardImg}`} src={item.image} alt={item.name}/>
                 <div className={`card-body text-center ${productCSS.cardBody}`} style={{minHeight:150}}>
-                  <h4 className="card-title product-name">{item.name}</h4>
+                  <h4 className="card-title product-name" style={{color:'#000000'}}>{item.name}</h4>
                   <p className={`card-text short-description ${productCSS.cardShortDescription}`} >{item.shortDescription}</p>
                 </div>
                 <div className={`card-footer ${productCSS.cardFooter}`}>
@@ -27,7 +27,7 @@ const ProductList = () => {
                       <NavLink href="#" className={` btn  text-decoration-none  text-white w-100 h-100 fs-4 ${productCSS.productButton}`} to={`/detail/${item.id}`}>View Detail</NavLink>
                     </div>
                     <div className=" col-6">
-                      <p className='text-center align-items-center  justify-content-center fs-4  mt-2 fw-5'>{item.price}</p>
+                      <p className='text-center align-items-center  justify-content-center fs-4  mt-2 fw-5'>{item.price}$</p>
                     </div>
                   </div>
                 </div>
